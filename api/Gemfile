@@ -1,0 +1,10 @@
+source 'http://rubygems.org'
+
+gem 'sinatra'
+gem 'rake'
+gem 'require_all'
+gem 'puma'
+gem 'pry'
+gem 'bcrypt'
+gem 'mongoid', '~> 7.3', '>= 7.3.2'
+gem 'tux', '~> 0.3.0'

@@ -1,0 +1,25 @@
+development:
+  clients:
+    default:
+      database: smart_ac_development
+      hosts:
+        - <%= ENV.fetch('MONGO_HOSTNAME') { 'mongo' }.strip %>:27017
+      options:
+test:
+  clients:
+    default:
+      database: smart_ac_test
+      hosts:
+        - <%= ENV.fetch('MONGO_HOSTNAME') { 'mongo' }.strip %>:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
+
+production:
+  clients:
+    default:
+     uri: <%= ENV['MONGODB_URI'] %>
+
+     options:
+       connect_timeout: 15

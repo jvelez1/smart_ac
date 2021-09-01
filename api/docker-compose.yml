@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  api:
+    build: .
+    command: bundle exec rackup --host 0.0.0.0 -p 4567
+    ports:
+      - "4567:4567"
+    depends_on:
+      - mongo
+    volumes:
+      - .:/api
+    tty: true
+    stdin_open: true
+
+  mongo:
+    image: mongo:3.6-xenial
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo:/data/db
+
+volumes:
+  mongo: {}
+ 
