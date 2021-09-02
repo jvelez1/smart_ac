@@ -4,7 +4,8 @@ class DeviceCreator
   end
 
   def call
-    device = Device.new(device_params)
+    token = generate_token(device_params)
+    device = Device.new(device_params.merge('token' => token))
     if device.valid?
       device.save
       result(true, device)
@@ -19,5 +20,11 @@ class DeviceCreator
 
   def result(valid, resp)
     OpenStruct.new(valid?: valid, response: resp)
+  end
+
+
+  def generate_token(params)
+    payload = params.select{ |k, _|['serial', 'secret'].include?(k) }
+    TokenGenerator.encrypt(payload)
   end
 end
