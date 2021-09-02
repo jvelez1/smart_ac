@@ -7,10 +7,6 @@ class ApplicationController < Sinatra::Base
     set :default_content_type, 'application/json'
   end
 
-  before do
-    handle_body_request
-  end
-
   get "/ping" do
     content_type :text
     
@@ -23,10 +19,8 @@ class ApplicationController < Sinatra::Base
     halt [status, messages.to_json]
   end
 
-  def handle_body_request
+  def fetch_params
     body_parameters = request.body.read
-    params.merge!(JSON.parse(body_parameters))
-  rescue 
-    nil
+    JSON.parse(body_parameters) if body_parameters.present?
   end
 end

@@ -1,6 +1,7 @@
 class DevicesController < ApplicationController
 
   post "/devices" do
+    params = fetch_params || {}
     resp = DeviceCreator.new(params).call
     if resp.valid?
       status 200

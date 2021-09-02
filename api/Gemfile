@@ -11,4 +11,3 @@ gem 'tux', '~> 0.3.0'
 gem 'jwt'
 gem 'dry-schema', '~> 1.7'
 gem 'fast_jsonapi'
-
