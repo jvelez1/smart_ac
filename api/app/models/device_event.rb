@@ -5,6 +5,7 @@ class DeviceEvent
   field :type, type: String
   field :value, type: Float
   field :measurement, type: String
+  field :event_time, type: DateTime
   field :status, type: String
 
   belongs_to :device

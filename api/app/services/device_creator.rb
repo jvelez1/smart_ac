@@ -1,4 +1,4 @@
-class DeviceCreator
+class DeviceCreator < ApplicationService
   def initialize(params)
     @device_params = params['devices']
   end
@@ -17,11 +17,6 @@ class DeviceCreator
   private
 
   attr_reader :device_params
-
-  def result(valid, resp)
-    OpenStruct.new(valid?: valid, response: resp)
-  end
-
 
   def generate_token(params)
     payload = params.select{ |k, _|['serial', 'secret'].include?(k) }
