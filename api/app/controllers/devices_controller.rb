@@ -13,6 +13,6 @@ class DevicesController < ApplicationController
 
   get "/devices" do
     status 200
-    body ::DeviceEventSerializer.new(Device.all).serialized_json
+    body ::DeviceSerializer.new(Device.all).serialized_json
   end
 end
