@@ -5,18 +5,27 @@ class ChartDeviceEventCreator < ApplicationService
   end
 
   def call
-    events = DeviceEvent.where(:created_at => (Time.now - 10.minutes..Time.now)).to_a
-    # Improve this with mongoid group
-    events.group_by(&:type).map do |label, grouped|
-      {
-        label: label,
-        input_labels: grouped.map(&:created_at),
-        data: grouped.map(&:value)
-      }
+    air = DeviceEvent.last_by_type(type: 'AIR_HUMIDITY')
+    temp = DeviceEvent.last_by_type(type: 'TEMPERATURE')
+    carbon = DeviceEvent.last_by_type(type: 'CARBON_MONOXIDE')
+
+    result = [].tap do |res|
+      res << build_event(air)
+      res << build_event(temp)
+      res << build_event(carbon)
     end
+    result.flatten
   end
 
   private
 
   attr_reader :params
+
+  def build_event(events)
+    {
+      label: events.first.type,
+      input_labels: events.map(&:created_at),
+      data: events.map(&:value)
+    }
+  end
 end

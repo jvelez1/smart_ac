@@ -51,7 +51,7 @@ export default function Sidebar() {
                 />
                 <NavItem navSize={navSize} icon={FiHome} title="Dashboard" link="/" />
                 <NavItem navSize={navSize} icon={FiBriefcase} title="Devices" link="/devices" />
-                <NavItem navSize={navSize} icon={FiUser} title="Users" link="/users" />
+                <NavItem navSize={navSize} icon={FiUser} title="Logout" link="/logout" />
             </Flex>
 
             <Flex

@@ -28,20 +28,35 @@ function Main() {
   const [carbon, setCarbon] = useState(null);
   const [fetched, setFetched] = useState(false);
 
+  function fetchCharData() {
+    const apiUrl = 'http://localhost:4567/device_events/charts';
+    axios.get(apiUrl).then((resp) => {
+      console.log(resp.data)
+      setCharts(resp.data)
+      setLoading(false);
+      setFetched(true)
+    });
+  }
+
+  function setCharts(responseData) {
+    console.log(responseData);
+    setCarbon(responseData.find(t => t.label == CARBON_MONOXIDE));
+    setTemp(responseData.find(t => t.label == TEMPERATURE));
+    setAirHumidity(responseData.find(t => t.label == AIR_HUMIDITY));
+  }
+
   useEffect(() => {
     if(!fetched) {
-      setLoading(true);
-      const apiUrl = 'http://localhost:4567/device_events/charts';
-      axios.get(apiUrl).then((resp) => {
-        const responseData = resp.data;
-
-        setCarbon(responseData.find(t => t.label == CARBON_MONOXIDE));
-        setTemp(responseData.find(t => t.label == TEMPERATURE));
-        setAirHumidity(responseData.find(t => t.label == AIR_HUMIDITY));
-        setFetched(true)
-      });
+      fetchCharData();
     }
-  }, [temp, air_humidity, carbon]);
+  }, []);
+
+  useEffect(async () => {
+    const interval = setInterval(async () => {
+      fetchCharData();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   if(!fetched) {
     return null;
@@ -49,7 +64,7 @@ function Main() {
 
   const temp_data = buildChartFor(temp, TEMPERATURE)
   const carbon_data = buildChartFor(carbon, CARBON_MONOXIDE)
-  const air_humidity_data = buildChartFor(air_humidity_data, AIR_HUMIDITY)
+  const air_humidity_data = buildChartFor(air_humidity, AIR_HUMIDITY)
   
   return (
     <Container maxW={'7xl'} centerContent>
