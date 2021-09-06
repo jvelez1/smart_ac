@@ -10,4 +10,9 @@ class DevicesController < ApplicationController
       error(422, resp.response)
     end
   end
+
+  get "/devices" do
+    status 200
+    body ::DeviceEventSerializer.new(Device.all).serialized_json
+  end
 end
