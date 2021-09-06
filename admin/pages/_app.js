@@ -2,6 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 import { Flex } from '@chakra-ui/layout'
 import { Container } from "@chakra-ui/react"
 import Sidebar from '../components/Sidebar'
+import Notifications from "./notifications"
 import Login from "./login"
 import React, { useState, useEffect } from 'react';
 
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider>
       <Flex>
         <Sidebar />
+        <Notifications />
         <Container maxW={'9xl'} centerContent>
           <Component  {...pageProps} />
         </Container>

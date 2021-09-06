@@ -12,7 +12,7 @@ module NotificationRules
 
     ### this need to be changed to use websockets / background jobs / any queue system
     def notify
-      users.map { |user| UserNotification.create(user: user, message: message) }
+      users.map { |user| UserNotification.create(user: user, message: message, topic: device_event.type) }
     end
   
   

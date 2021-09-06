@@ -4,4 +4,5 @@ run ApplicationController
 use DeviceEventsController
 use DevicesController
 use SessionsController
+use UsernotificationsController
 
