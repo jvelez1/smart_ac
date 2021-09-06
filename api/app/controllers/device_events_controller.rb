@@ -12,6 +12,14 @@ class DeviceEventsController < ApplicationController
     end
   end
 
+  get "/device_events/charts" do
+    params = fetch_params || {}
+    chart_data = ChartDeviceEventCreator.new(params).call
+
+    status 200
+    body chart_data.to_json
+  end
+
   private
 
   def fetch_device

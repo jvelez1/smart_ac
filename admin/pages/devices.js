@@ -21,7 +21,6 @@ function Devices() {
       const apiUrl = 'http://localhost:4567/devices';
       axios.get(apiUrl).then((resp) => {
         const devices = resp.data.data;
-        console.log(devices);
         setLoading(false);
         setDevices(devices)
       });

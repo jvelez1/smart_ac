@@ -49,10 +49,9 @@ export default function Sidebar() {
                             changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} icon={FiHome} title="Dashboard" link="/home" />
-                <NavItem navSize={navSize} icon={FiUser} title="Users" link="/users" />
-                <NavItem navSize={navSize} icon={FiBarChart2} title="Charts" link="/charts" />
+                <NavItem navSize={navSize} icon={FiHome} title="Dashboard" link="/" />
                 <NavItem navSize={navSize} icon={FiBriefcase} title="Devices" link="/devices" />
+                <NavItem navSize={navSize} icon={FiUser} title="Users" link="/users" />
             </Flex>
 
             <Flex
