@@ -1,0 +1,12 @@
+# pull official base image
+FROM node:16-alpine
+
+# set working directory
+WORKDIR /admin
+
+# add app
+COPY . /admin
+RUN yarn install
+
+# start app
+CMD ["yarn", "dev"]

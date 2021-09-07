@@ -2,16 +2,27 @@ version: "3.7"
 
 services:
   api:
-    build: .
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
     command: bundle exec rackup --host 0.0.0.0 -p 4567
     ports:
       - "4567:4567"
     depends_on:
       - mongo
     volumes:
-      - .:/api
+      - .:/smart_ac/api
     tty: true
     stdin_open: true
+
+  admin:
+    build: 
+      context: ./admin
+      dockerfile: Dockerfile.admin
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/smart_ac/admin
 
   mongo:
     image: mongo:3.6-xenial
