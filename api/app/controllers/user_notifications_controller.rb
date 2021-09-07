@@ -9,8 +9,8 @@ class UsernotificationsController < ApplicationController
 
 
   post "/user_notifications/:id/read" do
-    id = params['id']
     # @todo
+    id = params['id']
     user = User.first
     notification = user.user_notifications.where(id: id).first
     notification.update(readed: true)

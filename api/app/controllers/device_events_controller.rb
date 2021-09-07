@@ -24,7 +24,7 @@ class DeviceEventsController < ApplicationController
 
   def fetch_device
     token = request.env['HTTP_DEVICE_TOKEN']
-    device = Device.by_token(token)
+    device = Device.by_token(token) if token
     return device if device
 
     error(404, { error: 'Device not found' })

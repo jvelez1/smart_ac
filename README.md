@@ -14,7 +14,6 @@ docker-compose build
 docker-compose up
 ```
 
-
 # Api Docs:
 
 endpoint:
@@ -135,3 +134,19 @@ response 404
   "error": "Device not found"
 }
 ```
+
+# Frontend Docs:
+
+Credentials:
+
+```
+email: admin@smartac.com
+password: 123456789
+```
+
+In the admin side you will find:
+
+1. Chats that load every 10 sec.
+2. Notifcation that loads every 5 sec.
+3. Device listing.
+4. Logout

@@ -31,7 +31,6 @@ function Main() {
   function fetchCharData() {
     const apiUrl = 'http://localhost:4567/device_events/charts';
     axios.get(apiUrl).then((resp) => {
-      console.log(resp.data)
       setCharts(resp.data)
       setLoading(false);
       setFetched(true)
@@ -39,7 +38,6 @@ function Main() {
   }
 
   function setCharts(responseData) {
-    console.log(responseData);
     setCarbon(responseData.find(t => t.label == CARBON_MONOXIDE));
     setTemp(responseData.find(t => t.label == TEMPERATURE));
     setAirHumidity(responseData.find(t => t.label == AIR_HUMIDITY));

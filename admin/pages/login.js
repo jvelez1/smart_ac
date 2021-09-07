@@ -15,6 +15,7 @@ import {
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 async function loginUser(credentials) {
   const conf = {
@@ -22,8 +23,8 @@ async function loginUser(credentials) {
       'Content-Type': 'application/json'
     } 
   }
-  const postData = JSON.stringify(credentials)
-  return axios.post('http://localhost:4567/login', postData, conf)
+  // const postData = JSON.stringify(credentials)
+  return axios.post('http://localhost:4567/login', credentials, conf)
               .then(data => data.data)
               .catch(e => {console.log(e)})
  }
@@ -35,13 +36,18 @@ export default function Login({ setToken }) {
   const handleSubmit = async e => {
     e.preventDefault();
     const responseData = await loginUser({
-      username,
-      password
+      auth: {
+        username,
+        password
+      }
     });
     if(responseData?.token){
       sessionStorage.setItem('token', JSON.stringify(responseData));
+      setToken(responseData);
     }
-    setToken(responseData);
+    else{
+      toast.error('Ups! Invalid credentials')
+    }
   }
 
   return (
@@ -86,6 +92,7 @@ export default function Login({ setToken }) {
               </Button>
             </Stack>
           </form>
+          <ToastContainer />
           </Stack>
         </Box>
       </Stack>

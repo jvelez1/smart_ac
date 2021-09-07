@@ -6,7 +6,7 @@ Mongoid.load!('../api/config/mongoid.yml', 'development')
 if User.first
 	return 
 else
-	user = User.new(first_name: 'David', second_name: 'Rios', email: 'david@smartac.com', password: '123456789')
+	user = User.new(first_name: 'Super', second_name: 'Admin', email: 'admin@smartac.com', password: '123456789')
 	user.save!
 end
 
