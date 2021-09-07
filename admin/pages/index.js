@@ -54,7 +54,7 @@ function Main() {
   useEffect(async () => {
     const interval = setInterval(async () => {
       fetchCharData();
-    }, 5000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 

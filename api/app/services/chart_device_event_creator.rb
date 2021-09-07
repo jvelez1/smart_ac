@@ -1,13 +1,12 @@
 class ChartDeviceEventCreator < ApplicationService
   def initialize(params)
     @params = params
-    puts @params
   end
 
   def call
-    air = DeviceEvent.last_by_type(type: 'AIR_HUMIDITY')
-    temp = DeviceEvent.last_by_type(type: 'TEMPERATURE')
-    carbon = DeviceEvent.last_by_type(type: 'CARBON_MONOXIDE')
+    air = query_device_event('AIR_HUMIDITY')
+    temp = query_device_event('TEMPERATURE')
+    carbon = query_device_event('CARBON_MONOXIDE')
 
     result = [].tap do |res|
       res << build_event(air)
@@ -21,7 +20,13 @@ class ChartDeviceEventCreator < ApplicationService
 
   attr_reader :params
 
+  def query_device_event(event_type)
+    DeviceEvent.where(type: event_type).order(created_at: :desc).limit(10).to_a
+  end
+
   def build_event(events)
+    return [] unless events.any?
+
     {
       label: events.first.type,
       input_labels: events.map(&:created_at),

@@ -3,6 +3,7 @@
 
 ### Running the project
 
+This will create initial data the first time.
 In the root of this project:
 1. Build the images
 ```
@@ -12,6 +13,3 @@ docker-compose build
 ```
 docker-compose up
 ```
-### Setup initial data
-
-#### todo

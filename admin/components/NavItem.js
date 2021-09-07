@@ -3,11 +3,12 @@ import {
     Flex,
     Text,
     Icon,
-    Link,
     Menu,
     MenuButton,
     MenuList
 } from '@chakra-ui/react'
+
+import Link from 'next/link'
 
 export default function NavItem({ icon, title, description, active, navSize, link }) {
     return (

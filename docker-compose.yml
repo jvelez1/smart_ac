@@ -5,7 +5,7 @@ services:
     build: 
       context: ./api
       dockerfile: Dockerfile
-    command: bundle exec rackup --host 0.0.0.0 -p 4567
+    command: /bin/bash -c "bin/setup.sh"
     ports:
       - "4567:4567"
     depends_on:
@@ -23,6 +23,8 @@ services:
       - "3000:3000"
     volumes:
       - .:/smart_ac/admin
+    depends_on:
+      - api
 
   mongo:
     image: mongo:3.6-xenial

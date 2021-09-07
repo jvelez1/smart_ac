@@ -12,6 +12,4 @@ class DeviceEvent
 
   validates_inclusion_of :type, in: [ "TEMPERATURE", "AIR_HUMIDITY", "CARBON_MONOXIDE" ]
   validates_length_of :status, minimum: 1, maximum: 150
-
-  scope :last_by_type, ->(type) { where(type: type).order(created_at: :desc).limit(10) }
 end
