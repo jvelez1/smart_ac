@@ -55,6 +55,3 @@ device_events_with_notification = (1..6).map do |_|
 end
 
 result = DeviceEventCreator.new(device, { "device_events" => [device_events + device_events_with_notification].flatten }).call
-
-plain_device_token = '3060b8a2adf0c294b1f0157030278a9f'
-device.update!(token: plain_device_token)

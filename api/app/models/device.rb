@@ -18,6 +18,6 @@ class Device
 
   def self.by_token(token)
     payload = TokenGenerator.decrypt(token)
-    find_by(serial: payload['serial'], secret: payload['secret']) if payload
+    where(serial: payload['serial'], secret: payload['secret']).first if payload
   end
 end
